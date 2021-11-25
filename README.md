@@ -45,11 +45,11 @@ has_many :purchase_records
 | --------------------------| -----------| ----------------------------- |
 | products                  | string     | null: false                   | 
 | products_explanation      | text       | null: false                   |
-| catefory                  | string     | null: false                   | 
-| state                     | string     | null: false                   | 
-| postgate                  | string     | null: false                   | 
-| region                    | string     | null: false                   | 
-| shipping_data             | string     | null: false                   | 
+| category_id               | integer    | null: false                   | 
+| state_id                  | integer    | null: false                   | 
+| delivery_charge_id        | integer    | null: false                   | 
+| region_id                 | integer    | null: false                   | 
+| shipping_data_id          | integer    | null: false                   | 
 | price                     | integer    | null: false                   |
 | user                      | references | null: false foreign_key: true |
 
@@ -61,7 +61,7 @@ has_one :purchase_record
 | ----------------------| ---------- | ----------------------------- |
 | user                  | references | null: false foreign_key: true |
 | item                  | references | null: false foreign_key: true |
-| shipping_addresses_id | references | null: false foreign_key: true |
+
 
 belongs_to :user
 belongs_to :item
@@ -72,11 +72,11 @@ has_one :shipping_address
 | Colum              | Type       |Options                        |
 | -------------------| ---------- | ----------------------------- |
 | postal_code        | string     | null: false                   |
-| prefecture_id      | string     | null: false                   |
+| prefecture_id      | integer    | null: false                   |
 | city               | string     | null: false                   |
 | block              | string     | null: false                   |
 | building           | string     |                               |
 | phone_number       | string     | null: false                   |
-| purchase_records   | references | null: false foreign_key: true |
+| purchase_record   | references | null: false foreign_key: true |
 
 belongs_to :purchase_record
