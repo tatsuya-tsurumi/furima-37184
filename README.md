@@ -25,48 +25,58 @@ Things you may want to cover:
 
 ## usersテーブル
 
-| Colum              | Type   |Options                 |
-| -------------------| ------ | ---------------------- |
-| email              | string | NOT NULL, unique: true |
-| encrypted_password | string | NOT NULL               |
-| name               | string | NOT NULL               |
+| Colum              | Type   |Options                    |
+| -------------------| ------ | ------------------------- |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| nickname           | string | null: false               |
+| last_name          | string | null: false               |
+| first_name         | string | null: false               |
+| last_name_kana     | string | null: false               |
+| first_name_kana    | string | null: false               |
+| birthday           | date   | null: false               |
 
 has_many :items
 has_many :purchase_records
 
 ## itemsテーブル
 
-| Colum                | Type       |Options                     |
-| ---------------------| -----------| -------------------------- |
-| products             | string     | NOT NULL                   | 
-| products_explanation | text       | NOT NULL                   |
-| products_detail      | text       | NOT NULL                   |
-| price                | text       | NOT NULL                   |
-| user                 | references | NOT NULL foreign_key: true |
+| Colum                     | Type       |Options                        |
+| --------------------------| -----------| ----------------------------- |
+| products                  | string     | null: false                   | 
+| products_explanation      | text       | null: false                   |
+| catefory                  | string     | null: false                   | 
+| state                     | string     | null: false                   | 
+| postgate                  | string     | null: false                   | 
+| region                    | string     | null: false                   | 
+| shipping_data             | string     | null: false                   | 
+| price                     | integer    | null: false                   |
+| user                      | references | null: false foreign_key: true |
 
 belongs_to :user
-has_one :shipping_address
 has_one :purchase_record
 
 ## purchase_recordsテーブル
-| Colum              | Type       |Options                     |
-| -------------------| ---------- | -------------------------- |
-| user               | references | NOT NULL foreign_key: true |
-| item               | references | NOT NULL foreign_key: true |
+| Colum                 | Type       |Options                        |
+| ----------------------| ---------- | ----------------------------- |
+| user                  | references | null: false foreign_key: true |
+| item                  | references | null: false foreign_key: true |
+| shipping_addresses_id | references | null: false foreign_key: true |
 
 belongs_to :user
 belongs_to :item
+has_one :shipping_address
 
 
 ## shipping_addresses
-| Colum              | Type   |Options                 |
-| -------------------| ------ | ---------------------- |
-| postal_code        | string | NOT NULL               |
-| prefecture_id      | string | NOT NULL               |
-| city               | string | NOT NULL               |
-| block              | string | NOT NULL               |
-| building           | string |                        |
-| phone_number       | string | NOT NULL               |
+| Colum              | Type       |Options                        |
+| -------------------| ---------- | ----------------------------- |
+| postal_code        | string     | null: false                   |
+| prefecture_id      | string     | null: false                   |
+| city               | string     | null: false                   |
+| block              | string     | null: false                   |
+| building           | string     |                               |
+| phone_number       | string     | null: false                   |
+| purchase_records   | references | null: false foreign_key: true |
 
-has_many :items
-
+belongs_to :purchase_record
