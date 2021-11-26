@@ -77,6 +77,6 @@ has_one :shipping_address
 | block              | string     | null: false                   |
 | building           | string     |                               |
 | phone_number       | string     | null: false                   |
-| purchase_record   | references | null: false foreign_key: true |
+| purchase_record    | references | null: false foreign_key: true |
 
 belongs_to :purchase_record
