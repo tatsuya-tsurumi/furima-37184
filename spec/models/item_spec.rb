@@ -76,7 +76,8 @@ RSpec.describe Item, type: :model do
       it '価格が空だと保存できない' do
         @item.price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank", "Price is not a number")
+        binding.pry
+        expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it 'userが紐づいていなければ保存できない' do
         @item.user = nil
