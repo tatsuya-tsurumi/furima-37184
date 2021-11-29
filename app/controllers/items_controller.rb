@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :item_validates, except: [:index]
+  before_action :item_validates, except: [:index, :show]
   def index
     @item = Item.all.order('created_at DESC')
   end
@@ -15,6 +15,10 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show
+    @item = Item.find(params[:id])
   end
 
   private
