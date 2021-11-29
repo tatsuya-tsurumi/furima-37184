@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
   before_action :item_validates, except: [:index]
   def index
-    @item = Item.all
+    # @item = Item.all
+    # 商品一覧機能実装時に使用
   end
 
   def new
