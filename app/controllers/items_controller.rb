@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :item_validates, except: [:index, :new]
+  before_action :item_validates, except: [:index]
   def index
     @item = Item.all
   end
