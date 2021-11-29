@@ -1,8 +1,7 @@
 class ItemsController < ApplicationController
   before_action :item_validates, except: [:index]
   def index
-    # @item = Item.all
-    # 商品一覧機能実装時に使用
+    @item = Item.all.order('created_at DESC')
   end
 
   def new
