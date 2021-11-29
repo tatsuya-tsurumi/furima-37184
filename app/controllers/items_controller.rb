@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :item_validates, except: [:index, :new]
   def index
     @item = Item.all
   end
@@ -21,5 +22,9 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:products, :products_explanation, :category_id, :state_id, :delivery_charge_id, :region_id,
                                  :shipping_date_id, :price, :image).merge(user_id: current_user.id)
+  end
+
+  def item_validates
+    redirect_to new_user_session_path unless user_signed_in?
   end
 end
