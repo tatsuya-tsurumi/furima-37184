@@ -1,5 +1,5 @@
-class PurchaseRecordShippingAdress
-  include ActiveModel::model
+class PurchaseRecordShippingAddress
+  include ActiveModel::Model
   attr_accessor :postal_code, :prefecture_id, :city, :block, :building, :phone_number, :user_id, :item_id
 
   with_options presence: true do
@@ -12,6 +12,9 @@ class PurchaseRecordShippingAdress
   end
   validates :prefecture_id, numericality: {other_than: 1, message: "can't be blank"}
 
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :prefecture
+  def save
+   
+    purchase_record = PurchaseRecord.create(user_id: user_id, item_id: item_id)
+    shipping_address = ShippingAddress.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, block: block, building: building, phone_number: phone_number, purchase_record_id: purchase_record.id)
+  end
 end
