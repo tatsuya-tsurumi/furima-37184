@@ -1,10 +1,14 @@
 class PurchaseRecordsController < ApplicationController
   before_action :authenticate_user!
-  
+  before_action :set_item, only: [:index, :create]
+  before_action :contributor_confirmation
+  before_action :purchase_record_params
 
   def index
-    @item = Item.find(params[:item_id])
+    
+
     @items = PurchaseRecordShippingAddress.new
+    
   end
 
   def new
@@ -13,7 +17,7 @@ class PurchaseRecordsController < ApplicationController
 
   def create
    
-    @item = Item.find(params[:item_id])
+ 
     
     @items = PurchaseRecordShippingAddress.new(item_params)
     
@@ -42,7 +46,22 @@ class PurchaseRecordsController < ApplicationController
       )
   end
 
-  
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
 
+  def contributor_confirmation
+    
+    redirect_to root_path unless current_user != @item.user
+  end
+
+  def purchase_record_params
+    if  @item.purchase_record.present?
+      redirect_to root_path
+    end
+  end
+
+  
+  
 
 end
