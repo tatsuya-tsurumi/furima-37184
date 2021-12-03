@@ -12,6 +12,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
+    
     if @item.save
       redirect_to root_path
     else
@@ -23,6 +24,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    if  @item.purchase_record.present?
+      redirect_to root_path
+    end
   end
 
   def update
