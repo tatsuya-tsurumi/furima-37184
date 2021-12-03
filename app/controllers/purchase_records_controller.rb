@@ -1,7 +1,7 @@
 class PurchaseRecordsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item, only: [:index, :create]
-  before_action :contributor_confirmation
+  before_action :set_items, only: [:index, :create]
+  before_action :contributor_confirmations
   before_action :purchase_record_params
 
   def index
@@ -46,11 +46,11 @@ class PurchaseRecordsController < ApplicationController
       )
   end
 
-  def set_item
+  def set_items
     @item = Item.find(params[:item_id])
   end
 
-  def contributor_confirmation
+  def contributor_confirmations
     
     redirect_to root_path unless current_user != @item.user
   end
